@@ -6,25 +6,30 @@ const Weather = () => {
   const [weather, setWeather] = useState(null);
   const [error, setError] = useState("");
 
-  const apiKey = "YOUR_API_KEY"; // Replace with your OpenWeatherMap API key
+  const apiKey = "a1ca3358372d7aaf95d95f79f69ca751";
 
   const fetchWeather = async () => {
     if (!city) {
       setError("Please enter a city name.");
+      setWeather(null); // Clear previous weather data
       return;
     }
     setError(""); // Reset error message
+    setWeather(null); // Clear previous weather data
+
     try {
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
       );
+
       if (!response.ok) {
         throw new Error("City not found");
       }
+
       const data = await response.json();
-      setWeather(data);
+      setWeather(data); // Save weather data to state
     } catch (err) {
-      setError("City not found. Please try again.");
+      setError(err.message);
     }
   };
 
