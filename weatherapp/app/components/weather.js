@@ -8,6 +8,14 @@ const Weather = () => {
 
   const apiKey = "a1ca3358372d7aaf95d95f79f69ca751";
 
+  const buttonStyle = {
+    borderRadius: "50px",
+    backgroundColor: "#4CAF50",
+    color: "white",
+    padding: "15px 25px",
+    cursor: "pointer",
+  };
+
   const fetchWeather = async () => {
     if (!city) {
       setError("Please enter a city name.");
@@ -42,7 +50,11 @@ const Weather = () => {
         value={city}
         onChange={(e) => setCity(e.target.value)}
       />
-      <button onClick={fetchWeather}>Get Weather</button>
+      <br></br>
+
+      <button style={buttonStyle} onClick={fetchWeather}>
+        Get Weather
+      </button>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
